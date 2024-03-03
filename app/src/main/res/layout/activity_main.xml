@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.DetailActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
+        android:orientation="vertical"
+        tools:context=".activities.MainActivity"
+        tools:ignore="UselessParent">
+
+
+        <TextView
+            android:id="@+id/textViewIni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginVertical="44dp"
+            android:gravity="center"
+            android:text="@string/lista_de_tareas"
+            android:textColor="@color/black"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
+
+
+        <TextView
+            android:id="@+id/textViTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/task"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recViTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
