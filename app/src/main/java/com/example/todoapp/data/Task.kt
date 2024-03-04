@@ -1,14 +1,15 @@
 package com.example.todoapp.data
 
+
 import com.example.todoapp.utils.DatabaseManager
 
-class Task (var id : Int, var task : String, var done: Boolean){
+ class Task (var id : Int, var task : String, var done: Boolean)  {
 
 
 
 
     companion object {
-        const val TABLE_NAME = "listOfTasks.db"
+        const val TABLE_NAME = "Tasks"
         const val COLUMN_NAME_TASK = "task"
         const val COLUMN_NAME_DONE = "done"
         val  COLUMN_NAMES = arrayOf(

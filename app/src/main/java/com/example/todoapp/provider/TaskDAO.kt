@@ -12,12 +12,12 @@ class TaskDAO (context: Context){
 
     private var databaseManager : DatabaseManager = DatabaseManager(context)
 
-    fun insert (task: Task): Task {
+    fun insert(task: Task): Task {
 
         val db = databaseManager.writableDatabase
 
         var values = ContentValues()
-        values.put(Task.COLUMN_NAME_TASK, task.task)
+        values.put(Task.COLUMN_NAME_TASK,task.task)
         values.put(Task.COLUMN_NAME_DONE, task.done)
 
 
@@ -79,7 +79,7 @@ class TaskDAO (context: Context){
             val done = cursor.getInt(cursor.getColumnIndex(Task.COLUMN_NAME_DONE)) == 1
             // Log.i("DATABASE", "$id -> Task: $task, Done: $done")
 
-            task = Task( id, taskName, done)
+            task = Task (id,taskName,done)
 
 
         }

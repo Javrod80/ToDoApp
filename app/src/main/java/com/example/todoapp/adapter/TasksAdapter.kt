@@ -39,7 +39,15 @@ RecyclerView.Adapter<TasksAdapter.TaskDAOViewHolder>() {
 
         fun render(task: Task) {
 
-            binding.tvTask.text = task.task
+            binding.tvTask.setText(task.task)
+            binding.mcheckbox.isChecked = task.done
+            binding.trash.setOnClickListener {
+            }
+
+
+
+
+
 
 
         }
