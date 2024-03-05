@@ -4,19 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="MissingDefaultResource"
-    android:background="@color/teal_700">
+    android:background="@color/teal_700"
+    android:orientation="vertical">
 
 
 
     <EditText
-        android:id="@+id/dialog_button"
+        android:id="@+id/dialogEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         android:textColor="@color/white"
-        android:text="Añadir tareas"
+        android:hint="Añadir tareas"
         android:gravity="center"
         android:textStyle="italic"
-        android:textColorHint="@color/white"/>
+        android:textColorHint="@color/white" />
+
+
 
 </LinearLayout>

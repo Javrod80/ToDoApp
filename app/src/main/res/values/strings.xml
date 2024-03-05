@@ -4,5 +4,6 @@
     <string name="lista_de_tareas">Lista de tareas</string>
     <string name="task">Tareas</string>
     <string name="addTask" tools:ignore="ExtraTranslation">Añadir tareas</string>
+    <string name="delete_task_confirm">¿Borrar Tarea?</string>
 
 </resources>

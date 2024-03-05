@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.data.Task
 import com.example.todoapp.databinding.ItemTaskBinding
 
-class TasksAdapter (private var task : List<Task> = listOf(),  val onClickListener: (position: Int) -> Unit) :
-RecyclerView.Adapter<TasksAdapter.TaskDAOViewHolder>() {
+class TasksAdapter(
+    private var task: List<Task> = listOf(),
+    val onClickListener: (position: Int) -> Unit,
+    val onRemoveListener: (position: Int) -> Unit
+) :
+    RecyclerView.Adapter<TasksAdapter.TaskDAOViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskDAOViewHolder {
-        val binding = ItemTaskBinding.inflate((LayoutInflater.from(parent.context)),parent,false)
+        val binding = ItemTaskBinding.inflate((LayoutInflater.from(parent.context)), parent, false)
         return TaskDAOViewHolder(binding)
     }
 
@@ -19,11 +23,12 @@ RecyclerView.Adapter<TasksAdapter.TaskDAOViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TaskDAOViewHolder, position: Int) {
-        holder.render (task[position])
+        holder.render(task[position])
         holder.itemView.setOnClickListener {
             onClickListener(position)
-
         }
+        holder.binding.trash.setOnClickListener { onRemoveListener(position) }
+
 
     }
 
@@ -33,27 +38,17 @@ RecyclerView.Adapter<TasksAdapter.TaskDAOViewHolder>() {
     }
 
 
-
-    class TaskDAOViewHolder (val binding: ItemTaskBinding):
-        RecyclerView.ViewHolder (binding.root) {
+    class TaskDAOViewHolder(val binding: ItemTaskBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun render(task: Task) {
 
             binding.tvTask.setText(task.task)
             binding.mcheckbox.isChecked = task.done
-            binding.trash.setOnClickListener {
-            }
-
-
-
-
-
 
 
         }
     }
-
-
 
 
 }
