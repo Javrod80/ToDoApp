@@ -1,9 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">ToDoApp</string>
     <string name="add">ADD</string>
-    <string name="lista_de_tareas">Lista de tareas</string>
+    <string name="lista_de_tareas">Aplicacion de tareas</string>
     <string name="task">Tareas</string>
     <string name="addTask" tools:ignore="ExtraTranslation">Añadir tareas</string>
     <string name="delete_task_confirm">¿Borrar Tarea?</string>
+    <string name="delete_task_title">Eliminar tarea</string>
+    <string name="delete_task_button">Borrar</string>
+    <string name="delete_task_confirm_message">Está seguro de querer borrar la tarea: %1$s</string>
+    <string name="delete_task_success_message">Tarea borrada correctamente</string>
 
 </resources>

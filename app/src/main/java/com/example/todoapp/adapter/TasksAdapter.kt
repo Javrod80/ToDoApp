@@ -9,7 +9,9 @@ import com.example.todoapp.databinding.ItemTaskBinding
 class TasksAdapter(
     private var task: List<Task> = listOf(),
     val onClickListener: (position: Int) -> Unit,
+    //private val onCheckedListener: (position:Int) -> Unit,
     val onRemoveListener: (position: Int) -> Unit
+
 ) :
     RecyclerView.Adapter<TasksAdapter.TaskDAOViewHolder>() {
 
@@ -27,13 +29,16 @@ class TasksAdapter(
         holder.itemView.setOnClickListener {
             onClickListener(position)
         }
+        /*holder.binding.mcheckbox.setOnCheckedChangeListener { _, isChecked ->
+           onCheckedListener(position)
+        }*/
         holder.binding.trash.setOnClickListener { onRemoveListener(position) }
 
 
     }
 
     fun updateTask(results: List<Task>?) {
-        task = results!!
+        task = results !!
         notifyDataSetChanged()
     }
 

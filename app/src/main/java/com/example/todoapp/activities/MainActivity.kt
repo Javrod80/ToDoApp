@@ -18,8 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: TasksAdapter
-    private var tasklist: List<Task> = listOf()
-
+    private  var tasklist: List<Task> = listOf() //MutableList<Task>
     private lateinit var taskDAO: TaskDAO
 
 
@@ -52,13 +51,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecycledView() {
 
-       /* adapter = TasksAdapter(tasklist,){
+        adapter = TasksAdapter(listOf(),{
             onItemClickListener(it)
-        }*/
+        },{
+            onItemClickRemoveLister(it)
+        })
+
+
         binding.recViTask.adapter = adapter
         binding.recViTask.layoutManager = LinearLayoutManager(this)
 
     }
+
+    /*private fun onItemClickCheckBoxListener(position:Int) {
+        val taskList = mutableListOf<Task>()
+        val task: Task = taskList[position]
+        task.done = !task.done
+        taskDAO.update(task)
+
+    }*/
 
 
 
@@ -92,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun loadData() {
-        tasklist = taskDAO.findAll()
+        tasklist = taskDAO.findAll()//.toMutableList() // se llama a mutable
         adapter.updateTask(tasklist) // nueva tarea en adapter
     }
 
@@ -109,34 +120,27 @@ class MainActivity : AppCompatActivity() {
         val dialogBinding = ItemTaskBinding.inflate(layoutInflater)
 
         val dialogBuilder : AlertDialog.Builder = AlertDialog.Builder(this)
-        dialogBuilder.setTitle("Eliminar tarea")
-        //dialogBuilder.setMessage(getString(R.string.delete_task_confirm , task.task))
+        dialogBuilder.setTitle(getString(R.string.delete_task_title))
+        dialogBuilder.setMessage(getString(R.string.delete_task_confirm_message , task.task))
         dialogBuilder.setNegativeButton(android.R.string.cancel, DialogInterface.OnClickListener { dialog, id -> // cancel button
             dialog.dismiss()
         })
 
-        dialogBuilder.setPositiveButton("Eliminar", DialogInterface.OnClickListener { dialog, id ->
+        dialogBuilder.setPositiveButton(R.string.delete_task_button, DialogInterface.OnClickListener { dialog, id ->
 
             taskDAO.delete(task)
+
 
 
             loadData()
             dialog.dismiss()
         })
 
+        dialogBuilder.setView(dialogBinding.root)
+
 
         val alertDialog = dialogBuilder.create()
         alertDialog.show()
-
-
-
-
-
-
-
-
-
-
 
 
 
