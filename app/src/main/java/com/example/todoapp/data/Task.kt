@@ -20,8 +20,7 @@ import com.example.todoapp.utils.DatabaseManager
 
 
     }
-   // override fun toString(): String {
-       // return "$id -> Task : $task - $done"
+
     }
 
 

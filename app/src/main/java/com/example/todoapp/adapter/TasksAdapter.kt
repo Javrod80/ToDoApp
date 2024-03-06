@@ -9,7 +9,7 @@ import com.example.todoapp.databinding.ItemTaskBinding
 class TasksAdapter(
     private var task: List<Task> = listOf(),
     val onClickListener: (position: Int) -> Unit,
-    //private val onCheckedListener: (position:Int) -> Unit,
+    private val onCheckedListener: (position:Int) -> Unit,
     val onRemoveListener: (position: Int) -> Unit
 
 ) :
@@ -29,9 +29,11 @@ class TasksAdapter(
         holder.itemView.setOnClickListener {
             onClickListener(position)
         }
-        /*holder.binding.mcheckbox.setOnCheckedChangeListener { _, isChecked ->
-           onCheckedListener(position)
-        }*/
+        holder.binding.mcheckbox.setOnCheckedChangeListener { checkbox, isChecked ->
+            if (checkbox.isPressed) {
+                onCheckedListener(position)
+            }
+        }
         holder.binding.trash.setOnClickListener { onRemoveListener(position) }
 
 

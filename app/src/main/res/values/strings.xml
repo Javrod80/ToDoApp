@@ -9,5 +9,8 @@
     <string name="delete_task_button">Borrar</string>
     <string name="delete_task_confirm_message">Está seguro de querer borrar la tarea: %1$s</string>
     <string name="delete_task_success_message">Tarea borrada correctamente</string>
+    <string name="new_task">Nueva tarea</string>
+    <string name="create_task">Crear</string>
+    <string name="categories">Categorias</string>
 
 </resources>
