@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="todo_trabajo_category">#D81B60</color>
+    <color name="todo_personal_category">#00BCD4</color>
+    <color name="todo_estudio_category">#4CAF50</color>
+    <color name="todo_hogar_category">@color/purple_500</color>
+
+
 </resources>

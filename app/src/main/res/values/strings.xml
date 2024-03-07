@@ -7,10 +7,14 @@
     <string name="delete_task_confirm">¿Borrar Tarea?</string>
     <string name="delete_task_title">Eliminar tarea</string>
     <string name="delete_task_button">Borrar</string>
-    <string name="delete_task_confirm_message">Está seguro de querer borrar la tarea: %1$s</string>
+    <string name="delete_task_confirm_message">Está seguro:%1$s</string>
     <string name="delete_task_success_message">Tarea borrada correctamente</string>
     <string name="new_task">Nueva tarea</string>
     <string name="create_task">Crear</string>
-    <string name="categories">Categorias</string>
+    <string name="categories">Categorias :</string>
+
+    <string name="delete_cat_title">Eliminar categoria</string>
+    <string name="delete_cat_confirm">Está seguro:%1$s </string>
+    <string name="delete_cat_button">Borrar</string>
 
 </resources>

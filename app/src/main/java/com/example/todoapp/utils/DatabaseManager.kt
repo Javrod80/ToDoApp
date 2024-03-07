@@ -8,7 +8,7 @@ import com.example.todoapp.data.Task
 
 
 class DatabaseManager(context: Context) :
-    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+    SQLiteOpenHelper(context, DATABASE_NAME,null, DATABASE_VERSION) {
 
     companion object {
 
@@ -26,34 +26,25 @@ class DatabaseManager(context: Context) :
         private const val SQL_DELETE_TABLE = "DROP TABLE IF EXISTS Task"
 
 
-        const val DATABASECAT_NAME = "listOfCategories"
-        const val DATABASECAT_VERSION = 1
-        const val COLUMN_NAMECAT_ID = "id"
-
-        private const val SQL_CREATE_TABLECAT =
-            "CREATE TABLE ${Category.TABLECAT_NAME} (" +
-                    "$COLUMN_NAMECAT_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "${Category.COLUMN_NAME_CATEGORIES} TEXT)"
 
 
 
-        private const val SQL_DELETE_TABLECAT = "DROP TABLE IF EXISTS Categories"
     }
 
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQL_CREATE_TABLE)
-        db.execSQL(SQL_CREATE_TABLECAT)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        drestroyDatabase(db)
+        destroyDatabase(db)
         onCreate(db)
     }
 
-    private fun drestroyDatabase(db: SQLiteDatabase) {
+    private fun destroyDatabase(db: SQLiteDatabase) {
         db.execSQL(SQL_DELETE_TABLE)
-        db.execSQL(SQL_DELETE_TABLECAT)
+
 
 
     }

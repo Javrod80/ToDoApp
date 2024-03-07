@@ -40,7 +40,7 @@ class TaskDAO (context: Context){
         values.put(Task.COLUMN_NAME_DONE, task.done)
         values.put(Task.COLUMN_NAME_TASK, task.task)
 
-        var updatedRows = db.update(Task.TABLE_NAME, values, "id= ${task.id}",null)
+        var updatedRows = db.update(Task.TABLE_NAME, values, "${DatabaseManager.COLUMN_NAME_ID} = ${task.id}",null)
         Log.i("DATABASE", "Updated records: $updatedRows")
 
         db.close()
@@ -86,7 +86,7 @@ class TaskDAO (context: Context){
         cursor.close()
         db.close()
 
-        return task !!
+        return task
 
     }
 

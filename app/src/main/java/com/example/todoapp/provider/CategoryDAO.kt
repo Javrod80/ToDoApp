@@ -5,24 +5,24 @@ import android.content.ContentValues
 import android.content.Context
 import android.util.Log
 import com.example.todoapp.data.Category
-import com.example.todoapp.utils.DatabaseManager
+import com.example.todoapp.utils.DatabaseManagerCat
 
 class CategoryDAO (context: Context) {
 
-    private var databaseManager : DatabaseManager = DatabaseManager(context)
+    private var databaseManagerCat : DatabaseManagerCat = DatabaseManagerCat(context)
 
 
 
     fun insert(category: Category): Category {
 
-        val db = databaseManager.writableDatabase
+        val db = databaseManagerCat.writableDatabase
 
-        var values = ContentValues()
+        val values = ContentValues()
         values.put(Category.COLUMN_NAME_CATEGORIES,category.category)
 
 
 
-        var newRowId = db.insert(Category.TABLECAT_NAME, null, values)
+        val newRowId = db.insert(Category.TABLECAT_NAME, null, values)
         Log.i("DATABASE", "New record id: $newRowId")
 
         db.close()
@@ -35,22 +35,22 @@ class CategoryDAO (context: Context) {
     }
 
     fun update (category: Category){
-        val db = databaseManager.writableDatabase
+        val db = databaseManagerCat.writableDatabase
 
         var values = ContentValues()
 
         values.put(Category.COLUMN_NAME_CATEGORIES, category.category)
 
-        var updatedRows = db.update(Category.TABLECAT_NAME, values, "id= ${category.id}",null)
+        var updatedRows = db.update(Category.TABLECAT_NAME, values, "${DatabaseManagerCat.COLUMN_NAMECAT_ID}= ${category.id}",null)
         Log.i("DATABASE", "Updated records: $updatedRows")
 
         db.close()
 
     }
     fun delete (category: Category){
-        val db = databaseManager.writableDatabase
+        val db = databaseManagerCat.writableDatabase
 
-        val deletedRows = db.delete(Category.COLUMN_NAME_CATEGORIES,"${DatabaseManager.COLUMN_NAMECAT_ID} = ${category.id}",null)
+        val deletedRows = db.delete(Category.TABLECAT_NAME,"${DatabaseManagerCat.COLUMN_NAMECAT_ID}= ${category.id}",null)
         Log.i ("DATABASE","Deleted rows : $deletedRows")
 
         db.close()
@@ -59,12 +59,12 @@ class CategoryDAO (context: Context) {
     @SuppressLint("Range")
     fun find (id: Int): Category? {
 
-        val db = databaseManager.writableDatabase
+        val db = databaseManagerCat.writableDatabase
 
         val cursor = db.query(
             Category.TABLECAT_NAME,
             Category.COLUMN_NAMESCAT,
-            "${DatabaseManager.COLUMN_NAMECAT_ID} = $id",
+            "${DatabaseManagerCat.COLUMN_NAMECAT_ID}= $id",
             null,
             null,
             null,
@@ -75,7 +75,7 @@ class CategoryDAO (context: Context) {
 
 
         if (cursor.moveToNext()) {
-            val id = cursor.getInt(cursor.getColumnIndex(DatabaseManager.COLUMN_NAMECAT_ID))
+            val id = cursor.getInt(cursor.getColumnIndex(DatabaseManagerCat.COLUMN_NAMECAT_ID))
             val taskName = cursor.getString(cursor.getColumnIndex(Category.COLUMN_NAME_CATEGORIES))
 
             // Log.i("DATABASE", "$id -> Task: $task, Done: $done")
@@ -87,13 +87,14 @@ class CategoryDAO (context: Context) {
         cursor.close()
         db.close()
 
-        return category !!
+        return category
 
     }
 
     @SuppressLint("Range")
     fun findAll (): List<Category> {
-        val db = databaseManager.writableDatabase
+        val db = databaseManagerCat.writableDatabase
+
         val cursor = db.query(
             Category.TABLECAT_NAME,
             Category.COLUMN_NAMESCAT,
@@ -104,16 +105,16 @@ class CategoryDAO (context: Context) {
             null
         )
 
-        var list : MutableList<Category> = mutableListOf()
+        val list : MutableList<Category> = mutableListOf()
 
 
         while (cursor.moveToNext()) {
-            val id = cursor.getInt(cursor.getColumnIndex(DatabaseManager.COLUMN_NAMECAT_ID))
+            val id = cursor.getInt(cursor.getColumnIndex(DatabaseManagerCat.COLUMN_NAMECAT_ID))
             val taskName = cursor.getString(cursor.getColumnIndex(Category.COLUMN_NAME_CATEGORIES))
 
-            //Log.i("DATABASE", "$id -> Task: $taskName, Done: $done")
 
-            val category : Category = Category(id, taskName)
+
+            val category  = Category(id, taskName)
 
             list.add(category)
 
