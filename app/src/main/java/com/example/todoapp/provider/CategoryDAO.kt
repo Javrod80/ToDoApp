@@ -19,6 +19,10 @@ class CategoryDAO (context: Context) {
 
         val values = ContentValues()
         values.put(Category.COLUMN_NAME_CATEGORIES,category.category)
+        values.put(Category.COLUMN_ESTUDIO,category.category)
+        values.put(Category.COLUMN_TRABAJO,category.category)
+        values.put(Category.COLUMN_PERSONAL,category.category)
+        values.put(Category.COLUMN_HOGAR,category.category)
 
 
 
@@ -40,6 +44,10 @@ class CategoryDAO (context: Context) {
         var values = ContentValues()
 
         values.put(Category.COLUMN_NAME_CATEGORIES, category.category)
+        values.put(Category.COLUMN_ESTUDIO,category.category)
+        values.put(Category.COLUMN_TRABAJO,category.category)
+        values.put(Category.COLUMN_PERSONAL,category.category)
+        values.put(Category.COLUMN_HOGAR,category.category)
 
         var updatedRows = db.update(Category.TABLECAT_NAME, values, "${DatabaseManagerCat.COLUMN_NAMECAT_ID}= ${category.id}",null)
         Log.i("DATABASE", "Updated records: $updatedRows")
@@ -61,7 +69,7 @@ class CategoryDAO (context: Context) {
 
         val db = databaseManagerCat.writableDatabase
 
-        val cursor = db.query(
+        val cursor = db.query (
             Category.TABLECAT_NAME,
             Category.COLUMN_NAMESCAT,
             "${DatabaseManagerCat.COLUMN_NAMECAT_ID}= $id",
@@ -77,10 +85,15 @@ class CategoryDAO (context: Context) {
         if (cursor.moveToNext()) {
             val id = cursor.getInt(cursor.getColumnIndex(DatabaseManagerCat.COLUMN_NAMECAT_ID))
             val taskName = cursor.getString(cursor.getColumnIndex(Category.COLUMN_NAME_CATEGORIES))
+            val trabajo = cursor.getString(cursor.getColumnIndex(Category.COLUMN_TRABAJO))
+            val estudio = cursor.getString(cursor.getColumnIndex(Category.COLUMN_ESTUDIO))
+            val hogar = cursor.getString(cursor.getColumnIndex(Category.COLUMN_HOGAR))
+            val personal = cursor.getString(cursor.getColumnIndex(Category.COLUMN_PERSONAL))
+
 
             // Log.i("DATABASE", "$id -> Task: $task, Done: $done")
 
-            category = Category (id,taskName)
+            category = Category (id,taskName,trabajo,estudio,hogar,personal)
 
 
         }
@@ -105,16 +118,20 @@ class CategoryDAO (context: Context) {
             null
         )
 
-        val list : MutableList<Category> = mutableListOf()
+        var list : MutableList<Category> = mutableListOf()
 
 
         while (cursor.moveToNext()) {
             val id = cursor.getInt(cursor.getColumnIndex(DatabaseManagerCat.COLUMN_NAMECAT_ID))
             val taskName = cursor.getString(cursor.getColumnIndex(Category.COLUMN_NAME_CATEGORIES))
+            val trabajo = cursor.getString(cursor.getColumnIndex(Category.COLUMN_TRABAJO))
+            val estudio = cursor.getString(cursor.getColumnIndex(Category.COLUMN_ESTUDIO))
+            val hogar = cursor.getString(cursor.getColumnIndex(Category.COLUMN_HOGAR))
+            val personal = cursor.getString(cursor.getColumnIndex(Category.COLUMN_PERSONAL))
 
 
 
-            val category  = Category(id, taskName)
+            val category  = Category(id, taskName,trabajo,estudio,hogar,personal)
 
             list.add(category)
 

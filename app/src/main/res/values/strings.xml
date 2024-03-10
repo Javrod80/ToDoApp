@@ -16,5 +16,10 @@
     <string name="delete_cat_title">Eliminar categoria</string>
     <string name="delete_cat_confirm">Está seguro:%1$s </string>
     <string name="delete_cat_button">Borrar</string>
+    <string name="hogar">Hogar</string>
+    <string name="estudios">Estudios</string>
+    <string name="personal">Personal</string>
+    <string name="trabajo">Trabajo</string>
+    <string name="casa">Casa</string>
 
 </resources>

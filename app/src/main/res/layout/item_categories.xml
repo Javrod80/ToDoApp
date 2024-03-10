@@ -17,26 +17,25 @@
         app:cardCornerRadius="30dp">
 
 
+        <TextView
+            android:id="@+id/tvCategoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            tools:text="CATEGORIA" />
 
-            <TextView
-                android:id="@+id/tvCategoryName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="19sp"
-                android:textStyle="bold"
-                tools:text="CATEGORIA" />
-        
         <View
             android:id="@+id/divider"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            tools:background="@color/white"
-            android:layout_height="8dp"/>
+            android:layout_height="8dp"
+            android:layout_marginTop="20dp"
+            tools:background="@color/white" />
 
 
-        <ImageButton
+       <ImageButton
             android:id="@+id/delete"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
@@ -44,7 +43,8 @@
             android:src="@android:drawable/ic_menu_delete" />
 
 
-
     </androidx.cardview.widget.CardView>
+
+
 
 </FrameLayout>

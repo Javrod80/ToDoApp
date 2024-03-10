@@ -1,11 +1,7 @@
 package com.example.todoapp.adapter
 
 import android.view.LayoutInflater
-import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
@@ -52,39 +48,28 @@ class CategoriesAdapter(
 
         fun render(category: Category) {
 
-            binding.tvCategoryName.setText(category.category)
-            binding.divider.setBackgroundColor(
-                ContextCompat.getColor(binding.divider.context,R.color.todo_estudio_category))
 
+            binding.tvCategoryName.setText(category.category)
+
+
+            /*(Category(personal = "Personal", trabajo =
+            "Trabajo", estudios = "Estudios", hogar = "Hogar", category = "Category", id = 1))
+
+            binding.divider.setBackgroundColor(
+                ContextCompat.getColor(binding.divider.context, R.color.todo_estudio_category)
+            )*/
+
+            /* when (Category) {
+
+                 COLUMN_TRABAJO -> binding.tvCategoryName.text = "Trabajo"
+                 COLUMN_ESTUDIO -> binding.tvCategoryName.text = "Estudio"
+                 COLUMN_HOGAR -> binding.tvCategoryName.text = "Casa"
+                 COLUMN_PERSONAL -> binding.tvCategoryName.text = "Personal"
+
+             }*/
 
 
         }
-
-
-       /* fun getColor (category : Category , onItemSelected : (Int) -> Unit) {
-
-            when (Category) {
-                Category.COLUMN_NAME_CATEGORIES -> {
-                    binding.divider.setBackgroundColor(
-                        ContextCompat.getColor(binding.divider.context,R.color.todo_estudio_category)
-                    )
-
-                }
-
-
-            }
-
-        */
-
-
-
-
-
-
-
-
-
-
 
 
     }

@@ -13,6 +13,7 @@ import com.example.todoapp.data.Task
 import com.example.todoapp.databinding.ActivityMainBinding
 import com.example.todoapp.databinding.DialogCategoriesBinding
 import com.example.todoapp.databinding.DialogTaskBinding
+import com.example.todoapp.databinding.ItemCategoriesBinding
 import com.example.todoapp.provider.CategoryDAO
 import com.example.todoapp.provider.TaskDAO
 
@@ -27,10 +28,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var taskDAO: TaskDAO
 
     private lateinit var adapterCat: CategoriesAdapter
-    private lateinit var listcategories :MutableList<Category>
+    private  var listcategories  : List<Category> = listOf()
 
 
     private lateinit var categoryDAO: CategoryDAO
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -169,13 +171,17 @@ class MainActivity : AppCompatActivity() {
         adapter.updateTask(tasklist) // nueva tarea en adapter
 
 
+
     }
 
     private fun loadCat() {
 
 
-        listcategories = categoryDAO.findAll().toMutableList()
+        listcategories = categoryDAO.findAll()
         adapterCat.updateCategory(listcategories)
+        val binding = ItemCategoriesBinding.inflate(layoutInflater)
+
+        binding.tvCategoryName
 
 
     }

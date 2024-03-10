@@ -18,7 +18,11 @@ class DatabaseManagerCat(context: Context) :
         private const val SQL_CREATE_TABLECAT =
             "CREATE TABLE ${Category.TABLECAT_NAME} (" +
                     "$COLUMN_NAMECAT_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "${Category.COLUMN_NAME_CATEGORIES} TEXT)"
+                    "${Category.COLUMN_NAME_CATEGORIES} TEXT,"+
+                    "${Category.COLUMN_ESTUDIO} TEXT,"+
+                    "${Category.COLUMN_TRABAJO} TEXT,"+
+                    "${Category.COLUMN_PERSONAL} TEXT,"+
+                    "${Category.COLUMN_HOGAR} TEXT)"
 
 
         private const val SQL_DELETE_TABLECAT = "DROP TABLE IF EXISTS Category"

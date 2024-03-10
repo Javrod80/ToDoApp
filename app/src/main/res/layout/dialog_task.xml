@@ -21,5 +21,45 @@
         android:textColorHint="@color/white" />
 
 
+    <RadioGroup
+        android:id="@+id/rgCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbBusiness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/todo_trabajo_category"
+            android:checked="true"
+            android:text="@string/trabajo"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/rbPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/todo_personal_category"
+            android:text="@string/personal"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/rbestudio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/todo_estudio_category"
+            android:text="@string/estudios"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/rbHogar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/todo_hogar_category"
+            android:text="@string/casa"
+            android:textColor="@color/white" />
+    </RadioGroup>
+
+
 
 </LinearLayout>
