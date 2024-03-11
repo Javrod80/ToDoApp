@@ -2,13 +2,11 @@ package com.example.todoapp.activities
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.SearchView
-import android.widget.SearchView.OnQueryTextListener
-import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoapp.R
 import com.example.todoapp.adapter.CategoriesAdapter
@@ -23,8 +21,8 @@ import com.example.todoapp.provider.CategoryDAO
 import com.example.todoapp.provider.TaskDAO
 
 
-class MainActivity : AppCompatActivity(),
-    androidx.appcompat.widget.SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity()
+  {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -48,7 +46,7 @@ class MainActivity : AppCompatActivity(),
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.searchViewTask.setOnQueryTextListener(this)
+
 
         taskDAO = TaskDAO(this)
         categoryDAO = CategoryDAO(this)
@@ -71,10 +69,42 @@ class MainActivity : AppCompatActivity(),
         binding.floAddButton.setOnClickListener { showDialog() }
         binding.addCatBut.setOnClickListener { createCategory() }
 
+        binding.searchViewTask.setOnQueryTextListener (object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchbytask(query.orEmpty())
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+               return false
+            }
+
+        }
+        )
+
 
     }
 
-    private fun initRecycledView() {
+      private fun searchbytask(query: String) {
+          val response = searchbytask(query)
+
+          if (response != null) {
+              listcategories= listcategories
+
+
+          }
+
+
+
+
+
+
+
+
+      }
+
+
+      private fun initRecycledView() {
 
         adapter = TasksAdapter(listOf(), {
             onItemClickListener(it)
@@ -277,29 +307,6 @@ class MainActivity : AppCompatActivity(),
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        if (!query.isNullOrEmpty()) {
-            searchTask( query)
-        }
-
-        return true
-
-    }
-
-    private  fun searchTask(query: String){
 
 
-
-
-    }
-
-
-
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-            return true
-
-
-
-    }
 }

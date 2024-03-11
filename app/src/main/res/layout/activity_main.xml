@@ -17,15 +17,10 @@
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchViewTask"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:iconifiedByDefault="true"
+            app:iconifiedByDefault="false"
             android:layout_height="wrap_content"
-            app:queryHint="Buscador de tareas"
-            android:layout_width="0dp"/>
-
-
+            android:layout_width="match_parent"
+            app:queryHint="Buscador de tareas" />
 
 
 
@@ -106,7 +101,7 @@
         app:backgroundTint="@android:color/holo_orange_dark"
         android:layout_gravity="end|top"
         android:layout_marginEnd="32dp"
-        android:layout_marginVertical="100dp"
+        android:layout_marginVertical="145dp"
 
         app:fabSize="normal"
         app:tint="@color/black"
