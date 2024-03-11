@@ -2,6 +2,11 @@ package com.example.todoapp.activities
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.ArrayAdapter
+import android.widget.SearchView
+import android.widget.SearchView.OnQueryTextListener
+import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +23,8 @@ import com.example.todoapp.provider.CategoryDAO
 import com.example.todoapp.provider.TaskDAO
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -28,18 +34,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var taskDAO: TaskDAO
 
     private lateinit var adapterCat: CategoriesAdapter
-    private  var listcategories  : List<Category> = listOf()
+    private var listcategories: List<Category> = listOf()
 
 
     private lateinit var categoryDAO: CategoryDAO
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.searchViewTask.setOnQueryTextListener(this)
 
         taskDAO = TaskDAO(this)
         categoryDAO = CategoryDAO(this)
@@ -138,8 +147,12 @@ class MainActivity : AppCompatActivity() {
     private fun showDialog() {
         //AlertDialog
 
+        /*val spinner: Spinner = findViewById(R.id.spinnerCat)
+        var listCat: List<Category> = listOf()
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listCat)*/
 
         val dialogBinding = DialogTaskBinding.inflate(layoutInflater) //llamar a layout diferente
+
         val builder: AlertDialog.Builder = AlertDialog.Builder(this) //create dialogo
         builder.setTitle(getString(R.string.new_task)) // titulo del dialogo
         builder.setPositiveButton(
@@ -171,7 +184,6 @@ class MainActivity : AppCompatActivity() {
         adapter.updateTask(tasklist) // nueva tarea en adapter
 
 
-
     }
 
     private fun loadCat() {
@@ -181,7 +193,7 @@ class MainActivity : AppCompatActivity() {
         adapterCat.updateCategory(listcategories)
         val binding = ItemCategoriesBinding.inflate(layoutInflater)
 
-        binding.tvCategoryName
+        binding.tvCategoryName.text
 
 
     }
@@ -207,19 +219,19 @@ class MainActivity : AppCompatActivity() {
         dialogBuilder.setTitle(getString(R.string.delete_task_title))
         dialogBuilder.setMessage(getString(R.string.delete_task_confirm_message, task.task))
         dialogBuilder.setNegativeButton(android.R.string.cancel) { dialog, _ -> // cancel button
-                dialog.dismiss()
+            dialog.dismiss()
 
-            }
+        }
 
-        dialogBuilder.setPositiveButton(R.string.delete_task_button)  { dialog, _ ->
+        dialogBuilder.setPositiveButton(R.string.delete_task_button) { dialog, _ ->
 
-                taskDAO.delete(task)
-                // tasklist.removeAt(position)
+            taskDAO.delete(task)
+            // tasklist.removeAt(position)
 
 
-                loadData()
-                dialog.dismiss()
-            }
+            loadData()
+            dialog.dismiss()
+        }
 
         //dialogBuilder.setView(dialogBinding.root)
 
@@ -238,20 +250,56 @@ class MainActivity : AppCompatActivity() {
         dialogBuilder.setTitle(getString(R.string.delete_cat_title))
         dialogBuilder.setMessage(getString(R.string.delete_cat_confirm, category.category))
         dialogBuilder.setNegativeButton(android.R.string.cancel) { dialog, _ -> // cancel button
-                dialog.dismiss()
+            dialog.dismiss()
 
-            }
+        }
 
-        dialogBuilder.setPositiveButton(R.string.delete_cat_button) { dialog, _->
+        dialogBuilder.setPositiveButton(R.string.delete_cat_button) { dialog, _ ->
 
-                categoryDAO.delete(category)
+            categoryDAO.delete(category)
 
-                loadCat()
-                dialog.dismiss()
-            }
+            loadCat()
+            dialog.dismiss()
+        }
         dialogBuilder.show()
 
 
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (!query.isNullOrEmpty()) {
+            searchTask( query)
+        }
+
+        return true
+
+    }
+
+    private  fun searchTask(query: String){
+
+
+
+
+    }
+
+
+
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+            return true
+
+
+
+    }
 }

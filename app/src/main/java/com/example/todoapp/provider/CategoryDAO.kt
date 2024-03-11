@@ -5,11 +5,11 @@ import android.content.ContentValues
 import android.content.Context
 import android.util.Log
 import com.example.todoapp.data.Category
-import com.example.todoapp.utils.DatabaseManagerCat
+import com.example.todoapp.utils.DatabaseManager
 
 class CategoryDAO (context: Context) {
 
-    private var databaseManagerCat : DatabaseManagerCat = DatabaseManagerCat(context)
+    private var databaseManagerCat : DatabaseManager = DatabaseManager(context)
 
 
 
@@ -18,15 +18,11 @@ class CategoryDAO (context: Context) {
         val db = databaseManagerCat.writableDatabase
 
         val values = ContentValues()
-        values.put(Category.COLUMN_NAME_CATEGORIES,category.category)
-        values.put(Category.COLUMN_ESTUDIO,category.category)
-        values.put(Category.COLUMN_TRABAJO,category.category)
-        values.put(Category.COLUMN_PERSONAL,category.category)
-        values.put(Category.COLUMN_HOGAR,category.category)
+        values.put(Category.COLUMN_NAME_CATEGORY,category.category)
 
 
 
-        val newRowId = db.insert(Category.TABLECAT_NAME, null, values)
+        val newRowId = db.insert(Category.TABLE_NAME, null, values)
         Log.i("DATABASE", "New record id: $newRowId")
 
         db.close()
@@ -43,13 +39,9 @@ class CategoryDAO (context: Context) {
 
         var values = ContentValues()
 
-        values.put(Category.COLUMN_NAME_CATEGORIES, category.category)
-        values.put(Category.COLUMN_ESTUDIO,category.category)
-        values.put(Category.COLUMN_TRABAJO,category.category)
-        values.put(Category.COLUMN_PERSONAL,category.category)
-        values.put(Category.COLUMN_HOGAR,category.category)
+        values.put(Category.COLUMN_NAME_CATEGORY, category.category)
 
-        var updatedRows = db.update(Category.TABLECAT_NAME, values, "${DatabaseManagerCat.COLUMN_NAMECAT_ID}= ${category.id}",null)
+        var updatedRows = db.update(Category.TABLE_NAME, values, "${DatabaseManager.COLUMN_NAME_ID}= ${category.id}",null)
         Log.i("DATABASE", "Updated records: $updatedRows")
 
         db.close()
@@ -58,7 +50,7 @@ class CategoryDAO (context: Context) {
     fun delete (category: Category){
         val db = databaseManagerCat.writableDatabase
 
-        val deletedRows = db.delete(Category.TABLECAT_NAME,"${DatabaseManagerCat.COLUMN_NAMECAT_ID}= ${category.id}",null)
+        val deletedRows = db.delete(Category.TABLE_NAME,"${DatabaseManager.COLUMN_NAME_ID}= ${category.id}",null)
         Log.i ("DATABASE","Deleted rows : $deletedRows")
 
         db.close()
@@ -70,9 +62,9 @@ class CategoryDAO (context: Context) {
         val db = databaseManagerCat.writableDatabase
 
         val cursor = db.query (
-            Category.TABLECAT_NAME,
+            Category.TABLE_NAME,
             Category.COLUMN_NAMESCAT,
-            "${DatabaseManagerCat.COLUMN_NAMECAT_ID}= $id",
+            "${DatabaseManager.COLUMN_NAME_ID}= $id",
             null,
             null,
             null,
@@ -83,17 +75,13 @@ class CategoryDAO (context: Context) {
 
 
         if (cursor.moveToNext()) {
-            val id = cursor.getInt(cursor.getColumnIndex(DatabaseManagerCat.COLUMN_NAMECAT_ID))
-            val taskName = cursor.getString(cursor.getColumnIndex(Category.COLUMN_NAME_CATEGORIES))
-            val trabajo = cursor.getString(cursor.getColumnIndex(Category.COLUMN_TRABAJO))
-            val estudio = cursor.getString(cursor.getColumnIndex(Category.COLUMN_ESTUDIO))
-            val hogar = cursor.getString(cursor.getColumnIndex(Category.COLUMN_HOGAR))
-            val personal = cursor.getString(cursor.getColumnIndex(Category.COLUMN_PERSONAL))
+            val id = cursor.getInt(cursor.getColumnIndex(DatabaseManager.COLUMN_NAME_ID))
+            val taskName = cursor.getString(cursor.getColumnIndex(Category.COLUMN_NAME_CATEGORY))
 
 
             // Log.i("DATABASE", "$id -> Task: $task, Done: $done")
 
-            category = Category (id,taskName,trabajo,estudio,hogar,personal)
+            category = Category (id, taskName)
 
 
         }
@@ -109,7 +97,7 @@ class CategoryDAO (context: Context) {
         val db = databaseManagerCat.writableDatabase
 
         val cursor = db.query(
-            Category.TABLECAT_NAME,
+            Category.TABLE_NAME,
             Category.COLUMN_NAMESCAT,
             null,
             null,
@@ -122,16 +110,12 @@ class CategoryDAO (context: Context) {
 
 
         while (cursor.moveToNext()) {
-            val id = cursor.getInt(cursor.getColumnIndex(DatabaseManagerCat.COLUMN_NAMECAT_ID))
-            val taskName = cursor.getString(cursor.getColumnIndex(Category.COLUMN_NAME_CATEGORIES))
-            val trabajo = cursor.getString(cursor.getColumnIndex(Category.COLUMN_TRABAJO))
-            val estudio = cursor.getString(cursor.getColumnIndex(Category.COLUMN_ESTUDIO))
-            val hogar = cursor.getString(cursor.getColumnIndex(Category.COLUMN_HOGAR))
-            val personal = cursor.getString(cursor.getColumnIndex(Category.COLUMN_PERSONAL))
+            val id = cursor.getInt(cursor.getColumnIndex(DatabaseManager.COLUMN_NAME_ID))
+            val taskName = cursor.getString(cursor.getColumnIndex(Category.COLUMN_NAME_CATEGORY))
 
 
 
-            val category  = Category(id, taskName,trabajo,estudio,hogar,personal)
+            val category  = Category(id, taskName)
 
             list.add(category)
 

@@ -13,18 +13,26 @@ class DatabaseManager(context: Context) :
     companion object {
 
         const val DATABASE_NAME = "listOfTask.db"
-        const val DATABASE_VERSION = 1
+        const val DATABASE_VERSION = 2
         const val COLUMN_NAME_ID = "id"
 
 
-        private const val SQL_CREATE_TABLE =
+        private const val SQL_CREATE_TABLE_TASK =
             "CREATE TABLE ${Task.TABLE_NAME} (" +
                     "$COLUMN_NAME_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "${Task.COLUMN_NAME_TASK} TEXT," +
                     "${Task.COLUMN_NAME_DONE} BOOLEAN)"
 
-        private const val SQL_DELETE_TABLE = "DROP TABLE IF EXISTS Task"
+        private const val SQL_DELETE_TABLE_TASK = "DROP TABLE IF EXISTS ${Task.TABLE_NAME}"
 
+
+        private const val SQL_CREATE_TABLE_CATEGORY =
+            "CREATE TABLE ${Category.TABLE_NAME} (" +
+                    "${DatabaseManager.COLUMN_NAME_ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "${Category.COLUMN_NAME_CATEGORY} TEXT)"
+
+
+        private const val SQL_DELETE_TABLE_CATEGORY = "DROP TABLE IF EXISTS ${Category.TABLE_NAME}"
 
 
 
@@ -33,8 +41,8 @@ class DatabaseManager(context: Context) :
 
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL(SQL_CREATE_TABLE)
-
+        db.execSQL(SQL_CREATE_TABLE_TASK)
+        db.execSQL(SQL_CREATE_TABLE_CATEGORY)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -43,10 +51,8 @@ class DatabaseManager(context: Context) :
     }
 
     private fun destroyDatabase(db: SQLiteDatabase) {
-        db.execSQL(SQL_DELETE_TABLE)
-
-
-
+        db.execSQL(SQL_DELETE_TABLE_TASK)
+        db.execSQL(SQL_DELETE_TABLE_CATEGORY)
     }
 
 

@@ -15,6 +15,20 @@
         tools:context=".activities.MainActivity"
         tools:ignore="UselessParent">
 
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchViewTask"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:iconifiedByDefault="true"
+            android:layout_height="wrap_content"
+            app:queryHint="Buscador de tareas"
+            android:layout_width="0dp"/>
+
+
+
+
+
 
         <TextView
             android:id="@+id/textViewIni"
@@ -92,7 +106,8 @@
         app:backgroundTint="@android:color/holo_orange_dark"
         android:layout_gravity="end|top"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginVertical="100dp"
+
         app:fabSize="normal"
         app:tint="@color/black"
         android:layout_marginTop="150dp"/>

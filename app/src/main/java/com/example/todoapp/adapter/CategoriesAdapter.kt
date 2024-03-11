@@ -9,7 +9,7 @@ import com.example.todoapp.data.Category
 import com.example.todoapp.databinding.ItemCategoriesBinding
 
 class CategoriesAdapter(
-    private var category: List<Category> = listOf(),
+    private var category : List<Category> = listOf(),
     val onClickListener: (position: Int) -> Unit,
     val onRemoveListener: (position: Int) -> Unit
 ) : RecyclerView.Adapter<CategoriesAdapter.CategoryDAOViewHolder>() {
@@ -47,8 +47,6 @@ class CategoriesAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun render(category: Category) {
-
-
             binding.tvCategoryName.setText(category.category)
 
 
