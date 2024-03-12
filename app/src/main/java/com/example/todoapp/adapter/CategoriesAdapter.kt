@@ -50,21 +50,6 @@ class CategoriesAdapter(
             binding.tvCategoryName.setText(category.category)
 
 
-            /*(Category(personal = "Personal", trabajo =
-            "Trabajo", estudios = "Estudios", hogar = "Hogar", category = "Category", id = 1))
-
-            binding.divider.setBackgroundColor(
-                ContextCompat.getColor(binding.divider.context, R.color.todo_estudio_category)
-            )*/
-
-            /* when (Category) {
-
-                 COLUMN_TRABAJO -> binding.tvCategoryName.text = "Trabajo"
-                 COLUMN_ESTUDIO -> binding.tvCategoryName.text = "Estudio"
-                 COLUMN_HOGAR -> binding.tvCategoryName.text = "Casa"
-                 COLUMN_PERSONAL -> binding.tvCategoryName.text = "Personal"
-
-             }*/
 
 
         }

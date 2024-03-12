@@ -4,6 +4,11 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -38,7 +43,7 @@ class MainActivity : AppCompatActivity()
     private lateinit var categoryDAO: CategoryDAO
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -69,6 +74,8 @@ class MainActivity : AppCompatActivity()
         binding.floAddButton.setOnClickListener { showDialog() }
         binding.addCatBut.setOnClickListener { createCategory() }
 
+
+        //searchView
         binding.searchViewTask.setOnQueryTextListener (object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchbytask(query.orEmpty())
@@ -177,21 +184,58 @@ class MainActivity : AppCompatActivity()
     private fun showDialog() {
         //AlertDialog
 
-        /*val spinner: Spinner = findViewById(R.id.spinnerCat)
-        var listCat: List<Category> = listOf()
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listCat)*/
-
         val dialogBinding = DialogTaskBinding.inflate(layoutInflater) //llamar a layout diferente
 
+        // spinner
+
+        val categories = resources.getStringArray(R.array.Categories)
+        val arrayAdapter= ArrayAdapter (this,android.R.layout.simple_spinner_item,categories)
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        dialogBinding.spinnerCat.adapter = arrayAdapter
+
+        //mostrar lo que hace el spinner pero no es necesario
+        dialogBinding.spinnerCat.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+              //  Toast.makeText(this@MainActivity,"You have selected $selectedItem categorias", Toast.LENGTH_SHORT).show()
+
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+        // crear dialogo
+
+
+
         val builder: AlertDialog.Builder = AlertDialog.Builder(this) //create dialogo
+
         builder.setTitle(getString(R.string.new_task)) // titulo del dialogo
         builder.setPositiveButton(
             getString(R.string.create_task),
             DialogInterface.OnClickListener { dialog, id -> // name button
+                val selectedCategory = categories[dialogBinding.spinnerCat.selectedItemPosition] //muestra spinner
+
+
                 val taskName =
                     dialogBinding.dialogEditText.text.toString() // funcionalidad del button
                 val task = Task(-1, taskName, false) // nueva tarea
                 taskDAO.insert(task)
+
+                //tarea junto a categoria pero no funciona
+                dialogBinding.spinnerCat.setSelection(categories.indexOf(task.task)) //task.listCategories
+
+
+
 
                 loadData() // llamar a la nueva tarea creada
                 dialog.dismiss()
@@ -212,6 +256,9 @@ class MainActivity : AppCompatActivity()
     private fun loadData() {
         tasklist = taskDAO.findAll().toMutableList()//.toMutableList() // se llama a mutable
         adapter.updateTask(tasklist) // nueva tarea en adapter
+
+
+
 
 
     }
@@ -306,6 +353,9 @@ class MainActivity : AppCompatActivity()
         }
         return super.onOptionsItemSelected(item)
     }
+
+
+
 
 
 
